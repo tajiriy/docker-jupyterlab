@@ -25,5 +25,13 @@ jupyter lab --allow-root --ip=0.0.0.0 --no-browser --NotebookApp.token=''
 
 rm -rf /var/lib/apt/lists/*
 
-docker image build -t tajiriy/jupyterlab:0.1 .
+docker image build --no-cache -t tajiriy/jupyterlab:0.1 .
+docker image ls 
+docker container run -d -p 8888:8888 --mount type=bind,src=D:\JupyterNotebook,dst=/JupyterNotebook tajiriy/jupyterlab:0.1
+http://localhost:8888/lab
 
+# デバッグ用
+docker container run -it tajiriy/jupyterlab:0.1 /bin/bash
+
+# DockerHubに登録
+docker image push tajiriy/jupyterlab:0.1

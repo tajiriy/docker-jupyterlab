@@ -20,10 +20,14 @@ RUN pip3 install pandas matplotlib jupyterlab
 ENV TZ=Asia/Tokyo
 
 # ポートの指定
-EXPOSE 8889
+EXPOSE 8888
+
+# JupyterNotebookディレクトリ
+WORKDIR /JupyterNotebook
 
 # 設定ファイルの作成
 RUN jupyter notebook --generate-config
+RUN echo "c.NotebookApp.notebook_dir = '/JupyterNotebook'" >> ~/.jupyter/jupyter_notebook_config.py
 
-# Nginx の起動
-CMD ["jupyter lab", "--allow-root", "--ip=0.0.0.0", "--no-browser", "--NotebookApp.token=''"]
+# JupyterLab の起動
+CMD ["jupyter", "lab", "--allow-root", "--ip=0.0.0.0", "--no-browser", "--NotebookApp.token=''"]
