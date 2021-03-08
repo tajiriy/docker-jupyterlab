@@ -12,9 +12,9 @@ apt-get install -y nodejs npm
 apt-get install -y language-pack-ja
 update-locale LANG=ja_JP.UTF-8
 
-
-pip3 install pandas matplotlib jupyterlab
-
+# Python パッケージのインストール
+#pip3 install pandas matplotlib jupyterlab
+pip3 install -r requirements.txt
 
 # 設定ファイルの作成
 jupyter notebook --generate-config
@@ -26,6 +26,7 @@ jupyter lab --allow-root --ip=0.0.0.0 --no-browser --NotebookApp.token=''
 rm -rf /var/lib/apt/lists/*
 
 docker image build --no-cache -t tajiriy/jupyterlab:0.1 .
+docker image build --no-cache -t tajiriy/jupyterlab:0.2 .
 docker image ls 
 docker container run -d -p 8888:8888 --mount type=bind,src=D:\JupyterNotebook,dst=/JupyterNotebook tajiriy/jupyterlab:0.1
 http://localhost:8888/lab

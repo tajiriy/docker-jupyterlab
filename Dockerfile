@@ -13,8 +13,10 @@ RUN apt-get update && apt-get install -y \
     language-pack-ja \
     && rm -rf /var/lib/apt/lists/*
 
-# Jupyter Lab インストール
-RUN pip3 install pandas matplotlib jupyterlab
+# Pythonパッケージインストール
+WORKDIR /tmp
+COPY requirements.txt ${PWD}
+RUN pip3 install -r requirements.txt
 
 # タイムゾーンを設定する環境変数
 ENV TZ=Asia/Tokyo
